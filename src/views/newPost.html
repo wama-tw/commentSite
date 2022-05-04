@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <style>
+    .chiness {
+      font-family: "SF Pro TC", "SF Pro Text", "SF Pro Icons", "PingFang TC", "Noto Sans TC",
+        "Helvetica Neue", "Helvetica", "Arial", "Microsoft JhengHei", wf_SegoeUI,
+        "Segoe UI", Segoe, "Segoe WP", Tahoma, Verdana, Ubuntu, "Bitstream Vera Sans",
+        "DejaVu Sans", Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
+        "Droid Sans Fallback", "AR PL UMing TW", Roboto, "Helvetica Neue",
+        "Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
+        "Droid Sans", sans-serif;
+    }
+
+    textarea {
+      resize: none;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-800 font-light" onload="getPosts(document.getElementById('postsTimeLine'))">
+  <div class="flex min-w-full h-screen">
+    <div id="navbar"
+      class="flex min-w-full h-14 fixed  backdrop-filter backdrop-blur shadow-lg border-b border-gray-500 border-opacity-70">
+      <div class="min-w-full h-14 fixed bg-gray-800 opacity-10"></div>
+      <div class="min-w-full flex justify-between">
+        <div class="flex items-center z-50 p-2 ml-3 text-white font-thin text-3xl">
+          <a href="/posts" class="flex items-center">
+            <div class="ml-3">Wama</div>
+          </a>
+        </div>
+        <div id="accountDisplay" class="flex items-center z-50 p-2 mr-3 text-white text-base">
+          <a href="/naming">
+            <div class="ml-3 cursor-pointer">Hi, {{ .name }}</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-5 min-w-full mt-14 mx-3">
+      <div id="left-panel"
+        class="text-white chiness font-normal text-lg p-2 flex-col mt-5 w-full pr-4 border-r border-gray-500 border-opacity-70">
+        <a href="/posts">
+          <div class="flex items-stretch mb-2">
+            <div class="self-center p-1.5 w-10 h-10">
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house"
+                class="p-0.5 w-auto h-auto svg-inline--fa fa-house" role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512">
+                <path fill="currentColor"
+                  d="M575.8 255.5C575.8 273.5 560.8 287.6 543.8 287.6H511.8L512.5 447.7C512.5 450.5 512.3 453.1 512 455.8V472C512 494.1 494.1 512 472 512H456C454.9 512 453.8 511.1 452.7 511.9C451.3 511.1 449.9 512 448.5 512H392C369.9 512 352 494.1 352 472V384C352 366.3 337.7 352 320 352H256C238.3 352 224 366.3 224 384V472C224 494.1 206.1 512 184 512H128.1C126.6 512 125.1 511.9 123.6 511.8C122.4 511.9 121.2 512 120 512H104C81.91 512 64 494.1 64 472V360C64 359.1 64.03 358.1 64.09 357.2V287.6H32.05C14.02 287.6 0 273.5 0 255.5C0 246.5 3.004 238.5 10.01 231.5L266.4 8.016C273.4 1.002 281.4 0 288.4 0C295.4 0 303.4 2.004 309.5 7.014L564.8 231.5C572.8 238.5 576.9 246.5 575.8 255.5L575.8 255.5z">
+                </path>
+              </svg>
+            </div>
+            <div class="self-center ml-2">首頁</div>
+          </div>
+        </a>
+        <a href="https://web.cc.ncu.edu.tw/~109502544/">
+          <div class="flex items-stretch mb-2">
+            <div class="self-center p-1.5 w-10 h-10">
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card"
+                class="p-0.5 w-auto h-auto svg-inline--fa fa-address-card" role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512">
+                <path fill="currentColor"
+                  d="M512 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h448c35.35 0 64-28.65 64-64V96C576 60.65 547.3 32 512 32zM176 128c35.35 0 64 28.65 64 64s-28.65 64-64 64s-64-28.65-64-64S140.7 128 176 128zM272 384h-192C71.16 384 64 376.8 64 368C64 323.8 99.82 288 144 288h64c44.18 0 80 35.82 80 80C288 376.8 280.8 384 272 384zM496 320h-128C359.2 320 352 312.8 352 304S359.2 288 368 288h128C504.8 288 512 295.2 512 304S504.8 320 496 320zM496 256h-128C359.2 256 352 248.8 352 240S359.2 224 368 224h128C504.8 224 512 231.2 512 240S504.8 256 496 256zM496 192h-128C359.2 192 352 184.8 352 176S359.2 160 368 160h128C504.8 160 512 167.2 512 176S504.8 192 496 192z">
+                </path>
+              </svg>
+            </div>
+            <div class="self-center ml-2">以前寫的 JS 版本</div>
+          </div>
+        </a>
+        <a href="/traffic">
+          <div class="flex items-stretch mb-2">
+            <div class="self-center p-1.5 w-10 h-10">
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="address-card"
+                class="p-0.5 w-auto h-auto svg-inline--fa fa-address-card" role="img" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512">
+                <path fill="currentColor"
+                  d="M512 32H64C28.65 32 0 60.65 0 96v320c0 35.35 28.65 64 64 64h448c35.35 0 64-28.65 64-64V96C576 60.65 547.3 32 512 32zM176 128c35.35 0 64 28.65 64 64s-28.65 64-64 64s-64-28.65-64-64S140.7 128 176 128zM272 384h-192C71.16 384 64 376.8 64 368C64 323.8 99.82 288 144 288h64c44.18 0 80 35.82 80 80C288 376.8 280.8 384 272 384zM496 320h-128C359.2 320 352 312.8 352 304S359.2 288 368 288h128C504.8 288 512 295.2 512 304S504.8 320 496 320zM496 256h-128C359.2 256 352 248.8 352 240S359.2 224 368 224h128C504.8 224 512 231.2 512 240S504.8 256 496 256zM496 192h-128C359.2 192 352 184.8 352 176S359.2 160 368 160h128C504.8 160 512 167.2 512 176S504.8 192 496 192z">
+                </path>
+              </svg>
+            </div>
+            <div class="self-center ml-2">國道模擬器</div>
+          </div>
+        </a>
+        <a href="/posts/create">
+          <div class="bg-yellow-400 rounded-full w-full flex items-stretch p-2">
+            <div class="min-w-full text-center">寫新文章</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-start-2 col-span-3 overscroll-auto text-white text-lg p-2 mt-5 ">
+        <div id="main-div" class="flex-col w-full pl-5">
+          <div class="text-3xl pb-2 border-b border-gray-500 border-opacity-70">
+            Write Your New Post
+          </div>
+          <div class="mt-5">
+            <form action="" method="POST">
+              <input placeholder="Post title" name="title" class="py-3 px-4 my-3 bg-gray-700 rounded-xl w-full" />
+              <textarea placeholder="Write down your ideas now!!" name="content" id="newPostContent"
+                class="py-3 px-4 my-3 bg-gray-700 rounded-xl w-full h-96"></textarea>
+              <div class="mt-3 flex items-center justify-between">
+                <div id="warning" class="text-red-500 ml-4 "></div>
+                <input type="submit"
+                  class="cursor-pointer bg-yellow-400 font-medium w-min rounded-full px-5 py-2">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="self-end">
+      <div>Icons made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly
+          Gorbachev</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+          href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </footer>
+  </div>
+</body>
+
+</html>
